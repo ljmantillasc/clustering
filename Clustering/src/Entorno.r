@@ -43,3 +43,14 @@ setMethod(f="setCoordinate",
           }
 )
 
+
+Entorno.cargaImagen(inFile, xmin, xmax, ymin, ymax){
+  #inFile <- "C:/files/krel_1129_2012_254dpi_LZW.tif"
+  #outFile <- "out.tif"
+  s <- stack(inFile)
+  ex  <- raster(xmn=1, xmx=300, ymn=1, ymx=300)
+  projection(ex) <- proj4string(s)
+  s2 <- crop(s, ex)
+  #writeRaster(s2, outFile, format="GTiff", datatype='INT1U', overwrite=TRUE)
+  aux = matrix(as.vector(s2), nrow = (xmax*ymax) ) 
+}

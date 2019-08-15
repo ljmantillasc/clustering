@@ -54,7 +54,7 @@ clustering.fcmcalculaU <- function( data , matrixC, matrixU, nclusters, norm , E
     for (i in 1:nclusters ){
       suma <- 0
       for (k in 1:nclusters ){
-        suma <- suma + (mat[j,i]/mat[j,k])
+        suma <- suma + (mat[j,i]/mat[j,k])^2
       }
       matrixU[j,i] <- 1/suma
     }
@@ -100,7 +100,7 @@ Algorithm.FCM <- function(data, nclusters, matrixC , matrixU, error, iteraciones
     var = max(abs(matrixU-aux))
     print(var)
     aux <- matrixU
-    if ( var < error && i > 10 ) {
+    if ( var < error && i > 5 ) {
       break
     }
   }
@@ -130,7 +130,7 @@ main <- function(cls, norm, Entorno, clustering, Algorithm){
   data <- Entorno.cargaMatrix("data.rds")
   dimensiones = dim(data)
   print(dimensiones)
-  iteraciones = 12
+  iteraciones = 30
   error = 0.001
   
   for (i in (2:cls) ) {
